@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Exploration — Pakistan Tours &amp; Expeditions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1B24;
+    --bg-alt:#132530;
+    --ice:#7EC8DB;
+    --ice-soft:#B7E4EE;
+    --amber:#E8933A;
+    --amber-soft:#F2AE63;
+    --snow:#F5F8F9;
+    --muted:#93A8B4;
+    --line: rgba(245,248,249,0.12);
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--snow);
+    font-family:'Manrope', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    line-height:1.1;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:12px;
+    color:var(--amber-soft);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:28px; height:1px;
+    background:var(--amber-soft);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    padding:20px 0;
+    transition: background .3s ease, padding .3s ease, box-shadow .3s ease;
+  }
+  header.scrolled{
+    background:rgba(15,27,36,0.92);
+    backdrop-filter: blur(10px);
+    padding:14px 0;
+    box-shadow:0 1px 0 var(--line);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between;}
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:19px;
+    letter-spacing:-0.01em;
+    display:flex; align-items:center; gap:9px;
+  }
+  .logo .mark{
+    width:11px; height:11px;
+    background:var(--amber);
+    border-radius:2px;
+    transform:rotate(45deg);
+    flex:none;
+  }
+  .navlinks{display:flex; gap:36px; align-items:center;}
+  .navlinks a{
+    font-size:14.5px; font-weight:600; color:var(--muted);
+    transition:color .2s;
+    position:relative;
+  }
+  .navlinks a:hover{color:var(--snow);}
+  .navlinks .cta{
+    color:var(--bg);
+    background:var(--ice);
+    padding:10px 20px;
+    border-radius:100px;
+    font-weight:700;
+  }
+  .navlinks .cta:hover{background:var(--ice-soft);}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:120;}
+  .burger span{width:24px; height:2px; background:var(--snow); display:block;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    height:100vh; min-height:640px;
+    display:flex; align-items:flex-end;
+    position:relative;
+    background:#0c151b;
+  }
+  .hero-img{
+    position:absolute; inset:0;
+    background-image:url('https://images.pexels.com/photos/35302566/pexels-photo-35302566.jpeg?auto=compress&cs=tinysrgb&w=1920');
+    background-size:cover; background-position:center 62%;
+  }
+  .hero-scrim{
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(15,27,36,0.35) 0%, rgba(15,27,36,0.15) 30%, rgba(15,27,36,0.55) 65%, rgba(15,27,36,0.97) 100%);
+  }
+  .hero-content{position:relative; z-index:2; width:100%; padding-bottom:88px;}
+  .altitude-tag{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; letter-spacing:0.08em;
+    background:rgba(15,27,36,0.55);
+    border:1px solid rgba(126,200,219,0.4);
+    padding:8px 14px; border-radius:100px;
+    margin-bottom:26px;
+    color:var(--ice-soft);
+  }
+  .altitude-tag .dot{width:6px; height:6px; border-radius:50%; background:var(--ice); flex:none;}
+  .hero h1{
+    font-size:clamp(40px, 6.6vw, 84px);
+    max-width:920px;
+    color:var(--snow);
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--amber-soft);
+  }
+  .hero p{
+    max-width:520px;
+    color:var(--muted);
+    font-size:17px;
+    margin-top:22px;
+  }
+  .hero-actions{display:flex; gap:16px; margin-top:38px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:15px 28px;
+    border-radius:100px;
+    font-weight:700; font-size:14.5px;
+    cursor:pointer; border:none;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--amber); color:#231207;}
+  .btn-primary:hover{background:var(--amber-soft);}
+  .btn-ghost{background:transparent; color:var(--snow); border:1px solid rgba(245,248,249,0.35);}
+  .btn-ghost:hover{border-color:var(--snow);}
+
+  .scroll-cue{
+    position:absolute; right:32px; bottom:36px; z-index:2;
+    writing-mode:vertical-rl;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.2em;
+    color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{width:1px; height:50px; background:var(--muted);}
+
+  /* ---------- SECTIONS GENERIC ---------- */
+  .section{padding:120px 0;}
+  .section-tight{padding:90px 0;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+
+  /* ---------- ABOUT ---------- */
+  #about{background:var(--bg);}
+  #about h2{font-size:clamp(30px,4vw,46px); margin-bottom:24px;}
+  #about p{color:var(--muted); font-size:16px; margin-bottom:16px; max-width:520px;}
+  .stat-row{display:flex; gap:40px; margin-top:40px; flex-wrap:wrap;}
+  .stat b{
+    display:block; font-family:'JetBrains Mono', monospace;
+    font-size:34px; color:var(--ice); font-weight:600;
+  }
+  .stat span{font-size:12.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em;}
+  .about-visual{
+    position:relative; border-radius:20px; overflow:hidden;
+    aspect-ratio:4/5;
+  }
+  .about-visual img{width:100%; height:100%; object-fit:cover;}
+  .about-visual .badge{
+    position:absolute; bottom:20px; left:20px; right:20px;
+    background:rgba(15,27,36,0.75);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 18px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .about-visual .badge .mono{color:var(--ice-soft); font-size:13px;}
+  .about-visual .badge span{color:var(--muted); font-size:12px;}
+
+  /* ---------- SERVICES ---------- */
+  #services{background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .services-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; flex-wrap:wrap;}
+  .services-head h2{font-size:clamp(28px,3.6vw,42px); max-width:560px;}
+  .services-head p{color:var(--muted); max-width:360px; font-size:15px;}
+  .service-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:18px; overflow:hidden;}
+  .service-card{
+    background:var(--bg-alt);
+    padding:38px 30px;
+    transition:background .25s ease;
+  }
+  .service-card:hover{background:#17303d;}
+  .service-icon{
+    width:44px; height:44px; border-radius:12px;
+    background:rgba(126,200,219,0.12);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:22px;
+  }
+  .service-card h3{font-size:19px; margin-bottom:10px;}
+  .service-card p{color:var(--muted); font-size:14.5px;}
+
+  /* ---------- DESTINATIONS ---------- */
+  #destinations{background:var(--bg);}
+  .dest-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:56px;}
+  .dest-card{
+    position:relative; border-radius:18px; overflow:hidden;
+    aspect-ratio:3/4;
+    cursor:default;
+  }
+  .dest-card img{width:100%; height:100%; object-fit:cover; transition:transform .6s ease;}
+  .dest-card:hover img{transform:scale(1.08);}
+  .dest-scrim{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(15,27,36,0) 40%, rgba(15,27,36,0.92) 100%);
+  }
+  .dest-info{position:absolute; left:22px; right:22px; bottom:22px;}
+  .dest-alt{
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ice-soft);
+    background:rgba(15,27,36,0.6); border:1px solid rgba(126,200,219,0.35);
+    display:inline-block; padding:4px 10px; border-radius:100px; margin-bottom:10px;
+  }
+  .dest-info h3{font-size:22px; margin-bottom:4px;}
+  .dest-info p{font-size:13.5px; color:var(--muted);}
+
+  /* Altitude ladder */
+  .ladder{
+    margin-top:90px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:44px 40px;
+    background:var(--bg-alt);
+  }
+  .ladder-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:36px; flex-wrap:wrap; gap:16px;}
+  .ladder-head h3{font-size:22px;}
+  .ladder-head p{color:var(--muted); font-size:14px; max-width:380px;}
+  .ladder-track{position:relative; padding-left:18px;}
+  .ladder-track::before{
+    content:""; position:absolute; left:0; top:6px; bottom:6px; width:2px;
+    background:linear-gradient(180deg, var(--amber), var(--ice));
+  }
+  .ladder-item{
+    display:grid; grid-template-columns:130px 1fr auto;
+    align-items:center; gap:20px;
+    padding:18px 0 18px 22px;
+    border-bottom:1px dashed var(--line);
+    position:relative;
+  }
+  .ladder-item::before{
+    content:""; position:absolute; left:-5px; top:50%; transform:translateY(-50%);
+    width:10px; height:10px; border-radius:50%; background:var(--bg-alt);
+    border:2px solid var(--amber-soft);
+  }
+  .ladder-item:last-child{border-bottom:none;}
+  .ladder-alt{font-family:'JetBrains Mono', monospace; color:var(--amber-soft); font-size:15px; font-weight:600;}
+  .ladder-name{font-weight:700; font-size:16px;}
+  .ladder-name small{display:block; font-weight:500; color:var(--muted); font-size:13px; margin-top:2px;}
+  .ladder-tag{
+    font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;
+    justify-self:end; text-align:right;
+  }
+
+  /* ---------- GALLERY ---------- */
+  #gallery{background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    grid-auto-rows:140px;
+    gap:14px;
+    margin-top:56px;
+  }
+  .gallery-grid img{width:100%; height:100%; object-fit:cover; border-radius:14px; transition:transform .5s ease, filter .3s ease;}
+  .gallery-grid a{overflow:hidden; border-radius:14px; display:block;}
+  .gallery-grid a:hover img{transform:scale(1.06);}
+  .g-tall{grid-row:span 2;}
+  .g-wide{grid-column:span 2;}
+
+  /* ---------- TEAM ---------- */
+  #team{background:var(--bg);}
+  .team-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:28px; margin-top:56px;}
+  .team-card{text-align:left;}
+  .avatar{
+    width:100%; aspect-ratio:1; border-radius:16px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:30px;
+    color:var(--bg);
+    margin-bottom:16px;
+  }
+  .team-card h4{font-size:16.5px; margin-bottom:3px;}
+  .team-card span{font-size:13px; color:var(--muted);}
+  .team-note{margin-top:34px; font-size:13px; color:var(--muted); border-left:2px solid var(--amber-soft); padding-left:14px;}
+
+  /* ---------- CONTACT ---------- */
+  #contact{
+    background:var(--bg-alt);
+    border-top:1px solid var(--line);
+  }
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
+  #contact h2{font-size:clamp(28px,4vw,44px); margin-bottom:18px;}
+  #contact > .wrap > .contact-grid > div:first-child p{color:var(--muted); max-width:440px; margin-bottom:32px;}
+  .contact-rows{display:flex; flex-direction:column; gap:18px;}
+  .contact-row{display:flex; align-items:center; gap:16px;}
+  .contact-row .ico{
+    width:42px; height:42px; border-radius:10px; background:rgba(126,200,219,0.12);
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .contact-row a, .contact-row span.val{font-weight:600; font-size:15px;}
+  .contact-row .label{display:block; font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;}
+
+  form{display:flex; flex-direction:column; gap:16px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field label{font-size:12.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em;}
+  .field input, .field textarea{
+    background:var(--bg); border:1px solid var(--line); border-radius:10px;
+    padding:13px 16px; color:var(--snow); font-family:'Manrope', sans-serif; font-size:14.5px;
+    outline:none; transition:border-color .2s;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--ice);}
+  .field textarea{resize:vertical; min-height:110px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:44px 0; background:var(--bg);}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .footer-row p{font-size:13px; color:var(--muted);}
+  .footer-row .flinks{display:flex; gap:22px;}
+  .footer-row .flinks a{font-size:13px; color:var(--muted); font-weight:600;}
+  .footer-row .flinks a:hover{color:var(--snow);}
+
+  /* ---------- REVEAL ---------- */
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .grid-2{grid-template-columns:1fr; gap:40px;}
+    .service-grid{grid-template-columns:1fr;}
+    .dest-grid{grid-template-columns:1fr; }
+    .team-grid{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:160px;}
+    .g-wide{grid-column:span 2;}
+    .contact-grid{grid-template-columns:1fr;}
+    .ladder-item{grid-template-columns:90px 1fr; }
+    .ladder-tag{display:none;}
+  }
+  @media (max-width:760px){
+    .navlinks{
+      position:fixed; inset:0 0 0 30%; background:var(--bg-alt);
+      flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:40px; gap:26px;
+      transform:translateX(100%); transition:transform .35s ease;
+      border-left:1px solid var(--line);
+    }
+    .navlinks.open{transform:translateX(0);}
+    .burger{display:flex;}
+    .section{padding:80px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="logo"><span class="mark"></span>BEYOND EXPLORATION</a>
+      <div class="navlinks" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#team">Team</a>
+        <a href="#contact" class="cta">Plan a Trip</a>
+      </div>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-img"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-content wrap">
+    <div class="altitude-tag"><span class="dot"></span>2,438M · HUNZA VALLEY, GILGIT-BALTISTAN</div>
+    <h1>Pakistan, seen from <em>above the clouds.</em></h1>
+    <p>Beyond Exploration designs private and small-group journeys through Pakistan's northern
+       mountains for travelers from around the world — from first glaciers to full expeditions.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Plan Your Journey</a>
+      <a href="#destinations" class="btn btn-ghost">See Destinations</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>SCROLL</div>
+</section>
+
+<section id="about" class="section">
+  <div class="wrap grid-2">
+    <div class="reveal">
+      <div class="eyebrow">Who We Are</div>
+      <h2>Local guides. Global standards.<br>One country, endlessly explored.</h2>
+      <p>Beyond Exploration was built to show the world the Pakistan we grew up in — the
+         Karakoram and Himalayan valleys of Gilgit-Baltistan, their glacial lakes, orchards,
+         and mountain villages, far past the postcard version most travelers expect.</p>
+      <p>We plan and run every trip ourselves: routing, permits, drivers, guesthouses, and the
+         small local details that turn a itinerary into an actual good trip. Whether it's a
+         first-timer's week in Hunza or a full trek toward K2 Base Camp, we build it around you.</p>
+      <div class="stat-row">
+        <div class="stat"><b class="mono">10+</b><span>Regions Covered</span></div>
+        <div class="stat"><b class="mono">1000+</b><span>Travelers Guided</span></div>
+        <div class="stat"><b class="mono">4,114M</b><span>Highest Route — Deosai</span></div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <img src="https://images.pexels.com/photos/19442078/pexels-photo-19442078.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Shangrila Lake, Skardu">
+      <div class="badge">
+        <div><span class="mono">SHANGRILA LAKE</span><br><span>Skardu, Gilgit-Baltistan</span></div>
+        <span class="mono">2,500M</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section section-tight">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <h2>Every trip, planned around how you actually want to travel.</h2>
+      <p>Five ways to experience northern Pakistan — combined, customized, or booked as-is.</p>
+    </div>
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10"/></svg></div>
+        <h3>Custom Tour Planning</h3>
+        <p>Door-to-door itineraries built around your dates, pace, and budget — for solo travelers, couples, or families.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M3 20l6-14 4 8 3-5 5 11H3z"/></svg></div>
+        <h3>Trekking &amp; Expeditions</h3>
+        <p>Guided routes from day hikes to multi-day treks — Fairy Meadows, Deosai, and Karakoram base camps.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+        <h3>Cultural &amp; Heritage Tours</h3>
+        <p>Old forts, Silk Road villages, and Balti and Wakhi culture, guided by people who grew up in it.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg></div>
+        <h3>Photography Journeys</h3>
+        <p>Routes timed for light and season — cherry blossoms, autumn foliage, and clear-sky peak views.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.4 1.9-4.3 4.3-4.3s3.7 1.5 3.7 3.7"/></svg></div>
+        <h3>Group &amp; Corporate Retreats</h3>
+        <p>Logistics for larger groups — university clubs, NGOs, and company offsites — handled end to end.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M4 4v16h16M8 15l3-4 3 3 4-6"/></svg></div>
+        <h3>Airport-to-Valley Transfers</h3>
+        <p>Reliable 4x4 transport along the Karakoram Highway, with rest stops planned around road conditions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="destinations" class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Signature Destinations</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.8vw,44px); max-width:640px;">Three valleys worth building a whole trip around.</h2>
+
+    <div class="dest-grid reveal">
+      <div class="dest-card">
+        <img src="https://images.pexels.com/photos/35302566/pexels-photo-35302566.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hunza Valley">
+        <div class="dest-scrim"></div>
+        <div class="dest-info">
+          <div class="dest-alt">2,438M</div>
+          <h3>Hunza Valley</h3>
+          <p>Terraced orchards, Karakoram peaks, and centuries-old forts above the Hunza River.</p>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.pexels.com/photos/4065087/pexels-photo-4065087.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Attabad Lake">
+        <div class="dest-scrim"></div>
+        <div class="dest-info">
+          <div class="dest-alt">2,559M</div>
+          <h3>Attabad Lake</h3>
+          <p>A turquoise glacial lake formed in 2010, now one of the most-photographed stops on the KKH.</p>
+        </div>
+      </div>
+      <div class="dest-card">
+        <img src="https://images.pexels.com/photos/35302567/pexels-photo-35302567.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Skardu, Shangrila Resort">
+        <div class="dest-scrim"></div>
+        <div class="dest-info">
+          <div class="dest-alt">2,228M</div>
+          <h3>Skardu</h3>
+          <p>Gateway to K2 and the Karakoram giants, with cold deserts and glacial lakes minutes apart.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ladder reveal">
+      <div class="ladder-head">
+        <h3>For those going higher</h3>
+        <p>The same trip, at four different altitudes — pick where yours ends.</p>
+      </div>
+      <div class="ladder-track">
+        <div class="ladder-item">
+          <div class="ladder-alt">2,228M</div>
+          <div class="ladder-name">Skardu<small>Start point for every Karakoram route</small></div>
+          <div class="ladder-tag">Arrival</div>
+        </div>
+        <div class="ladder-item">
+          <div class="ladder-alt">3,300M</div>
+          <div class="ladder-name">Fairy Meadows<small>Base for views of Nanga Parbat, the 9th-highest peak on Earth</small></div>
+          <div class="ladder-tag">2–3 Day Trek</div>
+        </div>
+        <div class="ladder-item">
+          <div class="ladder-alt">4,114M</div>
+          <div class="ladder-name">Deosai Plains<small>One of the highest plateaus in the world, home to the Himalayan brown bear</small></div>
+          <div class="ladder-tag">High-Altitude Drive</div>
+        </div>
+        <div class="ladder-item">
+          <div class="ladder-alt">~5,150M</div>
+          <div class="ladder-name">K2 Base Camp<small>The full Karakoram expedition, for experienced trekkers</small></div>
+          <div class="ladder-tag">Multi-Week Expedition</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">The Views You're Actually Here For</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.8vw,42px); max-width:600px; margin-bottom:8px;">Northern Pakistan, in frame.</h2>
+
+    <div class="gallery-grid reveal">
+      <a class="g-tall" href="https://images.pexels.com/photos/13462643/pexels-photo-13462643.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/13462643/pexels-photo-13462643.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Karakoram Highway, Hunza">
+      </a>
+      <a class="g-wide" href="https://images.pexels.com/photos/33784883/pexels-photo-33784883.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/33784883/pexels-photo-33784883.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Shigar Lake, Skardu">
+      </a>
+      <a href="https://images.pexels.com/photos/31839244/pexels-photo-31839244.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/31839244/pexels-photo-31839244.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Boat on Attabad Lake">
+      </a>
+      <a href="https://images.pexels.com/photos/37266330/pexels-photo-37266330.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/37266330/pexels-photo-37266330.jpeg?auto=compress&cs=tinysrgb&w=600" alt="River in Skardu Valley">
+      </a>
+      <a class="g-wide" href="https://images.pexels.com/photos/19442076/pexels-photo-19442076.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/19442076/pexels-photo-19442076.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Lower Kachura Lake in autumn">
+      </a>
+      <a href="https://images.pexels.com/photos/33975256/pexels-photo-33975256.jpeg" target="_blank" rel="noopener">
+        <img src="https://images.pexels.com/photos/33975256/pexels-photo-33975256.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Autumn valley, Gilgit-Baltistan">
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">The People Behind the Trips</div>
+    <h2 class="reveal" style="font-size:clamp(28px,3.8vw,42px); max-width:560px;">Small team. Every trip planned personally.</h2>
+
+    <div class="team-grid reveal">
+      <div class="team-card">
+        <div class="avatar" style="background:var(--ice-soft);">SB</div>
+        <h4>Founder &amp; Lead Guide</h4>
+        <span>Route planning, permits</span>
+      </div>
+      <div class="team-card">
+        <div class="avatar" style="background:var(--amber-soft);">OM</div>
+        <h4>Operations Manager</h4>
+        <span>Logistics &amp; transport</span>
+      </div>
+      <div class="team-card">
+        <div class="avatar" style="background:#9FB3C0;">TC</div>
+        <h4>Senior Trek Coordinator</h4>
+        <span>On-ground trip leads</span>
+      </div>
+      <div class="team-card">
+        <div class="avatar" style="background:var(--ice);">GR</div>
+        <h4>Guest Relations</h4>
+        <span>Bookings &amp; support</span>
+      </div>
+    </div>
+    <p class="team-note reveal">Placeholder roles shown above — swap in your real team's names, titles, and
+       photos here once ready.</p>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">Get In Touch</div>
+      <h2>Tell us where you want to end up. We'll plan the way there.</h2>
+      <p>Send us a few lines about your dates, group size, and the kind of trip you're picturing —
+         we'll reply with a route and a price.</p>
+      <div class="contact-rows">
+        <div class="contact-row">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg></div>
+          <div><span class="label">Email</span><a href="mailto:info@beyondexploration.pk">info@beyondexploration.pk</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M4 4h4l2 6-3 2a12 12 0 006 6l2-3 6 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>
+          <div><span class="label">WhatsApp / Phone</span><span class="val">+92 300 0000000</span></div>
+        </div>
+        <div class="contact-row">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M12 21s7-6.3 7-11.5A7 7 0 105 9.5C5 14.7 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg></div>
+          <div><span class="label">Based In</span><span class="val">Gilgit-Baltistan, Pakistan</span></div>
+        </div>
+        <div class="contact-row">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8DB" stroke-width="1.8"><path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2zM9 21h6"/></svg></div>
+          <div><span class="label">Follow Along</span><a href="https://www.facebook.com/Beyondexplo/" target="_blank" rel="noopener">facebook.com/Beyondexplo</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <form action="mailto:info@beyondexploration.pk" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="Name" type="text" required placeholder="Your full name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="Email" type="email" required placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="dates">Preferred Dates</label>
+          <input id="dates" name="Dates" type="text" placeholder="e.g. July 2027, 10 days">
+        </div>
+        <div class="field">
+          <label for="message">Tell us about your trip</label>
+          <textarea id="message" name="Message" placeholder="Group size, destinations in mind, anything else..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="justify-content:center;">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <p>&copy; <span id="year"></span> Beyond Exploration. All rights reserved.</p>
+    <div class="flinks">
+      <a href="#about">About</a>
+      <a href="#destinations">Destinations</a>
+      <a href="https://www.facebook.com/Beyondexplo/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
